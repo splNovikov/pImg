@@ -1,0 +1,1 @@
+Paste images extension for chrome.
