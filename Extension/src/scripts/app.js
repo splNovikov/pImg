@@ -148,7 +148,6 @@ require(['ImgSettings', 'injector'], function (ImgSettings, injector) {
 //            {title: 'ILU by me', path: 'https://pp.vk.me/c624519/v624519777/571bc/G7twCjZ51zU.jpg'},
 //            {title: 'ILU Katty', path: 'https://pp.vk.me/c622126/v622126729/538fb/LYkJUM4u82s.jpg'},
 //            {title: 'ILU M', path: 'https://pp.vk.me/c627826/v627826531/2190b/WSWCdfblV2M.jpg'},
-//            {title: 'ILU by Ksu', path: 'https://pp.vk.me/c629122/v629122628/1684a/eqCk6ygIKhc.jpg'},
 //            {title: 'Хуёси', path: 'https://pp.vk.me/c623619/v623619729/49b12/YX4_OAoJZog.jpg'},
 //            {title: 'Стиффлер показывает факи', path: 'https://pp.vk.me/c627725/v627725520/1b1a6/Bq7EwdtRg6w.jpg'},
 //            {title: 'Английский fuck you', path: 'https://pp.vk.me/c622830/v622830410/53d7e/95yWb1xf1h4.jpg'},
