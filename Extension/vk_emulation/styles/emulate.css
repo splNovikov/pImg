@@ -1,0 +1,6 @@
+.small-div{
+	width: 300px;
+	margin: 50px auto;
+	height: 50px;
+	border: 1px dashed darkslategray;
+}

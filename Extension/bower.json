@@ -1,0 +1,13 @@
+{
+  "name": "pImg",
+  "version": "2.0.1",
+  "authors": [
+    "Pavel <spl.novikov@gmail.com>"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "lodash": "~3.10.1",
+    "requirejs": "~2.2.0"
+  },
+  "devDependencies": { }
+}
