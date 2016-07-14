@@ -1,9 +1,9 @@
 require(['ImgSettings', 'injector'], function (ImgSettings, injector) {
-	'use strict';
-
 	let settings = new ImgSettings();
+	let smallPollingMs = 300;
+	let longPollingMs = 1500;
 
-	polling(settings, 300);
+	polling(settings, smallPollingMs);
 
 	function polling(ms) {
 		polling.currentMs = ms;
@@ -13,14 +13,14 @@ require(['ImgSettings', 'injector'], function (ImgSettings, injector) {
 
 			// if there are no any button -> restart polling
 			if (sendButtons.length === 0) {
-				_restartPolling(polling, 300);
+				_restartPolling(polling, smallPollingMs);
 				return;
 			}
 
 			let notInjectedButtons = injector.filterNotInjectedButtons(sendButtons, settings.injectedStyleName);
 
 			if (notInjectedButtons.length !== 0) {
-				_restartPolling(polling, 1500);
+				_restartPolling(polling, longPollingMs);
 				injector.startHtmlInjection(notInjectedButtons, settings.injectedStyleName);
 			}
 		}, ms);

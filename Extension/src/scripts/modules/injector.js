@@ -2,8 +2,7 @@
  * Created by Novikov on 7/11/2016.
  */
 
-define('injector', [], function () {
-		'use strict';
+define('injector', ['injectedInButtonPart'], function (injectedInButtonPart) {
 
 		return {
 			startHtmlInjection: startHtmlInjection,
@@ -60,7 +59,7 @@ define('injector', [], function () {
 		function _injectToButton(btn, insertStyleName) {
 			btn.className += ` ${insertStyleName}`;
 
-			//        $imBtn.append(pImgExt.hTMLs.arrowWrapper);
+			//$imBtn.append(pImgExt.hTMLs.arrowWrapper);
 		}
 	}
 );
