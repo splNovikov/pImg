@@ -4,3 +4,5 @@ PublishDEV/
 PublishPROD/
 node_modules/
 Extension/bower_components/
+*.css
+*.map
