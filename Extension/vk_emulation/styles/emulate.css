@@ -1,6 +1,13 @@
-.small-div{
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
+
+.small-div {
 	width: 300px;
-	margin: 50px auto;
 	padding: 5px;
 	height: 50px;
 	border: 1px dashed darkslategray;
