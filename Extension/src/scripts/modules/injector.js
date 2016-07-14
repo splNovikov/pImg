@@ -15,6 +15,13 @@ define('injector', [
 			findSendButtons: findSendButtons
 		};
 
+		/**
+		 * Main injection function. It Injects to all buttons new html
+		 * @param notInjectedButtons
+		 * @param injectedStyleName
+		 * @public
+		 * @returns {*}
+		 */
 		function startHtmlInjection(notInjectedButtons, injectedStyleName) {
 			let slicedArray;
 
