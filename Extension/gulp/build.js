@@ -68,12 +68,6 @@
 			.pipe(gulp.dest(buildSettings.environment.dest + '/scripts/app'));
 	});
 
-	gulp.task('cleanAppJS', function () {
-		return del([
-			buildSettings.environment.dest + '/scripts/app/app.js'
-		], {force: true});
-	});
-
 	gulp.task('copyAppJS', function () {
 		return gulp.src([
 				buildSettings.paths.src + '/scripts/modules/*.js',

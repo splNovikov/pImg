@@ -1,26 +1,28 @@
 @import "basics/colors";
 
 .paste-img {
+  $block-width: 30px;
+
   background-color: $cyan !important;
   position: relative;
   border-radius: 3px;
 
+  .old-content-wrapper {
+    margin-right: $block-width;
+  }
+
   .arrow-block {
-    display: inline-block;
     position: absolute;
-    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $block-width;
     right: 0;
     top: 0;
     height: 100%;
-    text-align: center;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     transition: 500ms;
-
-    .arrow-down {
-      margin-top: 6px;
-      display: inline-block;
-    }
 
     &:hover {
       background-color: $cyan-lighter;

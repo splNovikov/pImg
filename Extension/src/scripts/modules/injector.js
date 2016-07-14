@@ -2,7 +2,12 @@
  * Created by Novikov on 7/11/2016.
  */
 
-define('injector', ['injectedInButtonPart'], function (injectedInButtonPart) {
+define('injector', [
+		'injectionToButtonTemplate',
+		'oldContentWrapper'],
+
+	function (injectionToButtonTemplate,
+	          oldContentWrapper) {
 
 		return {
 			startHtmlInjection: startHtmlInjection,
@@ -56,10 +61,20 @@ define('injector', ['injectedInButtonPart'], function (injectedInButtonPart) {
 			return Array.prototype.slice.call(document.querySelectorAll(buttonsSelectors));
 		}
 
+		/**
+		 * Injecting html to button
+		 * @param btn - current button for injection
+		 * @param insertStyleName - styleName to mark that button has been injected
+		 * @private
+		 */
 		function _injectToButton(btn, insertStyleName) {
 			btn.className += ` ${insertStyleName}`;
 
-			//$imBtn.append(pImgExt.hTMLs.arrowWrapper);
+			let newInnerHtml = oldContentWrapper.wrap(btn.innerHTML);
+			newInnerHtml += injectionToButtonTemplate;
+
+			btn.innerHTML = newInnerHtml;
 		}
+
 	}
 );
