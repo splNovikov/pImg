@@ -15,8 +15,11 @@ define('ImgSettings', [], function () {
 					return instance;
 				}
 
-				this.injectedStyleName = 'paste-img';
-				this.arrowBlockSelector = 'pimg-arrow-block';
+				this.pImgSelectors = {
+					primary: 'paste-img',
+					arrowBlock: 'p-img-arrow',
+					popup: 'p-img-popup'
+				};
 				this.vkElements = {
 					sendButtonsSelectors: ['button._im_send', 'button.addpost_button']
 				};

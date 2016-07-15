@@ -23,30 +23,29 @@ define('injector', [
 
 		/**
 		 * Main injection function. It Injects to all buttons new html
-		 * @param notInjectedButtons
-		 * @param injectedStyleName
+		 * @param notInjectedButtons {Array}
+		 * @param pImgSelectors {Object}
 		 * @public
 		 * @returns {*}
 		 */
-		function startHtmlInjection(notInjectedButtons, injectedStyleName, arrowBlockSelector) {
-			_injectToButton(notInjectedButtons[0], injectedStyleName, arrowBlockSelector);
+		function startHtmlInjection(notInjectedButtons, pImgSelectors) {
+			_injectToButton(notInjectedButtons[0], pImgSelectors);
 
 			let slicedArray = notInjectedButtons.slice(1);
 			if (slicedArray.length !== 0) {
-				return startHtmlInjection(slicedArray, injectedStyleName, arrowBlockSelector);
+				return startHtmlInjection(slicedArray, pImgSelectors);
 			}
 		}
 
 		/**
 		 * Filters from send buttons - returns only not "injected buttons"
-		 * @param sendBtns {array}
+		 * @param sendBtnArr {Array}
 		 * @param injectedStyleName {string}
-		 * @param notInjectedBtns {array}
 		 * @returns {Array}
 		 * @private
 		 */
-		function filterNotInjectedButtons(sendBtns, injectedStyleName) {
-			return _.filter(sendBtns, function (sendBtn) {
+		function filterNotInjectedButtons(sendBtnArr, injectedStyleName) {
+			return _.filter(sendBtnArr, function (sendBtn) {
 				return !sendBtn.classList.contains(injectedStyleName);
 			});
 		}
@@ -64,15 +63,15 @@ define('injector', [
 		/**
 		 * Injecting html to button
 		 * @param btn - current button for injection
-		 * @param insertStyleName - styleName to mark that button has been injected
+		 * @param pImgSelectors {Object}
 		 * @private
 		 */
-		function _injectToButton(btn, btnInjectStyleName, arrowBlockSelector) {
-			btn.className += ` ${btnInjectStyleName}`;
+		function _injectToButton(btn, pImgSelectors) {
+			btn.className += ` ${pImgSelectors.primary}`;
 
-			btn.innerHTML = _generateNewInnerHtml(btn, arrowBlockSelector);
+			btn.innerHTML = _generateNewInnerHtml(btn, pImgSelectors.arrowBlock);
 
-			buttonInjection.addListener(btn, arrowBlockSelector);
+			buttonInjection.addListener(btn, pImgSelectors);
 		}
 
 		/**

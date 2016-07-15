@@ -4,7 +4,7 @@
 
 define('buttonInjection', ['lodash'], function (_) {
 
-		const templateHtml = `
+		const template = `
 			<div class="<%- arrowSelector %>">
 				<span class="arrow-down">&#x25BC</span>
 			</div>`;
@@ -21,11 +21,11 @@ define('buttonInjection', ['lodash'], function (_) {
 		 * @returns {String}
 		 */
 		function getTemplate() {
-			return templateHtml.trim();
+			return template.trim();
 		}
 
 		/**
-		 * Fills temlate with selector and return html
+		 * Fills temlate with selector and returns html
 		 * @param template
 		 * @param selector
 		 * @public
@@ -38,13 +38,13 @@ define('buttonInjection', ['lodash'], function (_) {
 		/**
 		 * Add listeners to arrow block in button
 		 * @param btn
-		 * @param arrowBlockSelector
+		 * @param pImgSelectors {Object}
 		 * @public
 		 */
-		function addListener(btn, arrowBlockSelector) {
-			let btnArrowBlock = btn.getElementsByClassName(arrowBlockSelector);
-			// todo p-img-popup - from arguments
-			let popup = btn.getElementsByClassName('p-img-popup');
+		function addListener(btn, pImgSelectors) {
+			let btnArrowBlock = btn.getElementsByClassName(pImgSelectors.arrowBlock);
+			let popup = btn.getElementsByClassName(pImgSelectors.popup);
+
 			_addListenerToArrowBlock(btnArrowBlock[0], popup[0]);
 		}
 

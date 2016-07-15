@@ -4,7 +4,7 @@
 
 define('popupInjection', ['lodash'], function (_) {
 
-		const templateHtml = `
+		const template = `
 			<div class="p-img-popup" id="p-img-popup">
 				<div class="images-container" id="images-container">
 
@@ -27,10 +27,20 @@ define('popupInjection', ['lodash'], function (_) {
 
 		};
 
+		/**
+		 * Returns template
+		 * @returns {*}
+		 */
 		function getTemplate() {
-			return templateHtml.trim();
+			return template.trim();
 		}
 
+		/**
+		 * Fill template with images and returns html
+		 * @param template
+		 * @param images {Array}
+		 * @returns {*}
+		 */
 		function fillTemplate(template, images) {
 			return _.template(template)({images: images});
 		}
