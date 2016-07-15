@@ -88,5 +88,4 @@ define('injector', [
 			return [popupInjectionHtml, oldContentHtml, injectionToButtonHtml].join('');
 		}
 	}
-)
-;
+);

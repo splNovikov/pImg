@@ -29,7 +29,7 @@ define('popupInjection', ['lodash'], function (_) {
 
 		/**
 		 * Returns template
-		 * @returns {*}
+		 * @returns {String}
 		 */
 		function getTemplate() {
 			return template.trim();
@@ -39,7 +39,7 @@ define('popupInjection', ['lodash'], function (_) {
 		 * Fill template with images and returns html
 		 * @param template
 		 * @param images {Array}
-		 * @returns {*}
+		 * @returns {String}
 		 */
 		function fillTemplate(template, images) {
 			return _.template(template)({images: images});
