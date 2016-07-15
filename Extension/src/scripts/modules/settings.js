@@ -5,18 +5,25 @@
 define('ImgSettings', [], function () {
 		'use strict';
 
-		function ImgSettings() {
-			let instance = this;
+		let ImgSettings;
 
-			this.injectedStyleName = 'paste-img';
-			this.vkElements = {
-				sendButtonsSelectors: ['button._im_send', 'button.addpost_button']
-			};
+		(function () {
+			let instance;
 
 			ImgSettings = function () {
-				return instance;
-			};
-		}
+				if (instance) {
+					return instance;
+				}
+
+				this.injectedStyleName = 'paste-img';
+				this.arrowBlockSelector = 'pimg-arrow-block';
+				this.vkElements = {
+					sendButtonsSelectors: ['button._im_send', 'button.addpost_button']
+				};
+
+				instance = this;
+			}
+		})();
 
 		return ImgSettings;
 	}

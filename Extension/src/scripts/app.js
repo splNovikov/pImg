@@ -21,7 +21,7 @@ require(['ImgSettings', 'injector'], function (ImgSettings, injector) {
 
 			if (notInjectedButtons.length !== 0) {
 				_restartPolling(polling, longPollingMs);
-				injector.startHtmlInjection(notInjectedButtons, settings.injectedStyleName);
+				injector.startHtmlInjection(notInjectedButtons, settings.injectedStyleName, settings.arrowBlockSelector);
 			}
 		}, ms);
 	}
@@ -39,7 +39,6 @@ require(['ImgSettings', 'injector'], function (ImgSettings, injector) {
 		clearInterval(polling.interval);
 		polling(newPollingMs);
 	}
-
 });
 
 //(function init() {
