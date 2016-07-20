@@ -5,26 +5,23 @@
 define('popupInjection', ['lodash'], function (_) {
 
 		const template = `
-			<div class="p-img-popup" id="p-img-popup">
-				<div class="images-container" id="images-container">
+				<div class="images-container">
 
-				<% _.forEach(images, function(image) { %>
-				<div class="image-wrapper">
-					<img src="<%- image.path %>" alt="<%- image.title %>" title="<%- image.title %>"/>
+					<% _.forEach(images, function(image) { %>
+					<div class="image-wrapper">
+						<img src="<%- image.path %>" alt="<%- image.title %>" title="<%- image.title %>"/>
+					</div>
+					<% }); %>
+
 				</div>
-				<% }); %>
-
-			</div>
-			<div class="triangle-down-wrapper">
-				<div class="triangle-down"></div>
-				<div class="triangle-down-border"></div>
-			</div>
-		</div>`;
+				<div class="triangle-down-wrapper">
+					<div class="triangle-down"></div>
+					<div class="triangle-down-border"></div>
+				</div>`;
 
 		return {
 			getTemplate: getTemplate,
 			fillTemplate: fillTemplate
-
 		};
 
 		/**

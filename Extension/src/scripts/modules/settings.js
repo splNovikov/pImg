@@ -3,8 +3,6 @@
  */
 
 define('ImgSettings', [], function () {
-		'use strict';
-
 		let ImgSettings;
 
 		(function () {
@@ -18,8 +16,10 @@ define('ImgSettings', [], function () {
 				this.pImgSelectors = {
 					primary: 'paste-img',
 					arrowBlock: 'p-img-arrow',
+					oldContent: 'old-content-wrapper',
 					popup: 'p-img-popup'
 				};
+				this.uniqueAttributeName = 'data-pimg-unique-name';
 				this.vkElements = {
 					sendButtonsSelectors: ['button._im_send', 'button.addpost_button']
 				};

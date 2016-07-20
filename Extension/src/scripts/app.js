@@ -1,27 +1,27 @@
 require(['ImgSettings', 'injector'], function (ImgSettings, injector) {
-	let settings = new ImgSettings();
-	let smallPollingMs = 300;
-	let longPollingMs = 1500;
+	let _settings = new ImgSettings();
+	let _smallPollingMs = 300;
+	let _longPollingMs = 1500;
 
-	polling(settings, smallPollingMs);
+	polling(_settings, _smallPollingMs);
 
 	function polling(ms) {
 		polling.currentMs = ms;
 		polling.interval = setInterval(function () {
 			// find all send buttons
-			let sendBtnArr = injector.findSendButtons(settings.vkElements.sendButtonsSelectors);
+			let sendBtnArr = injector.findSendButtons(_settings.vkElements.sendButtonsSelectors);
 
 			// if there are no any button -> restart polling
 			if (sendBtnArr.length === 0) {
-				_restartPolling(polling, smallPollingMs);
+				_restartPolling(polling, _smallPollingMs);
 				return;
 			}
 
-			let notInjectedButtons = injector.filterNotInjectedButtons(sendBtnArr, settings.pImgSelectors.primary);
+			let notInjectedButtons = injector.filterNotInjectedButtons(sendBtnArr, _settings.uniqueAttributeName);
 
 			if (notInjectedButtons.length !== 0) {
-				_restartPolling(polling, longPollingMs);
-				injector.startHtmlInjection(notInjectedButtons, settings.pImgSelectors);
+				_restartPolling(polling, _longPollingMs);
+				injector.makeHtmlInjectionAndBindings(notInjectedButtons);
 			}
 		}, ms);
 	}

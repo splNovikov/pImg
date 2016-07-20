@@ -70,6 +70,7 @@
 
 	gulp.task('copyAppJS', function () {
 		return gulp.src([
+				buildSettings.paths.src + '/scripts/eventProvider/*.js',
 				buildSettings.paths.src + '/scripts/modules/*.js',
 				buildSettings.paths.src + '/scripts/components/*.js',
 				buildSettings.paths.src + '/scripts/app.js'])
