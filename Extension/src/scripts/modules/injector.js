@@ -87,7 +87,6 @@ define('injector', [
 		}
 
 		/**
-		 *
 		 * @param popupSelector
 		 * @returns {Element}
 		 * @private
@@ -103,6 +102,7 @@ define('injector', [
 
 		/**
 		 * @param btn {HTMLButtonElement}
+		 * @param oldContentSelector {String}
 		 * @returns {Element}
 		 * @private
 		 */
@@ -114,7 +114,6 @@ define('injector', [
 		}
 
 		/**
-		 *
 		 * @param arrowBlockSelector {String}
 		 * @returns {Element}
 		 * @private
@@ -128,7 +127,6 @@ define('injector', [
 		}
 
 		/**
-		 *
 		 * @param btn {HTMLButtonElement}
 		 * @param primarySelector {String}
 		 * @param popupInjectionNode {Element}
@@ -151,7 +149,6 @@ define('injector', [
 		}
 
 		/**
-		 *
 		 * @returns {string}
 		 * @private
 		 */
