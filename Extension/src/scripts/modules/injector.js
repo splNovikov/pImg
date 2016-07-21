@@ -19,7 +19,7 @@ define('injector', [
 
 		return {
 			makeHtmlInjectionAndBindings: makeHtmlInjectionAndBindings,
-			filterNotInjectedButtons: filterNotInjectedButtons,
+			filterInjectedButtons: filterInjectedButtons,
 			findSendButtons: findSendButtons
 		};
 
@@ -31,7 +31,7 @@ define('injector', [
 		 */
 		function makeHtmlInjectionAndBindings(notInjectedButtons) {
 			let elements = _injectToButton(notInjectedButtons[0]);
-			eventProviderFacade.bindPrimary(elements);
+			eventProviderFacade.bind(elements);
 
 			let slicedArray = notInjectedButtons.slice(1);
 			if (slicedArray.length !== 0) {
@@ -40,15 +40,17 @@ define('injector', [
 		}
 
 		/**
-		 * Filters from send buttons - returns only not "injected buttons"
+		 * Filters from send buttons -
+		 * returns only not "injected buttons" or only "injected"
 		 * @param sendBtnArr {Array}
 		 * @param uniqueAttributeName {String}
+		 * @param isInjected {Boolean} - true -> return injected; false -> return not injected
 		 * @returns {Array}
 		 * @private
 		 */
-		function filterNotInjectedButtons(sendBtnArr, uniqueAttributeName) {
+		function filterInjectedButtons(sendBtnArr, uniqueAttributeName, isInjected) {
 			return _.filter(sendBtnArr, function (sendBtn) {
-				return !sendBtn.hasAttribute(uniqueAttributeName);
+				return sendBtn.hasAttribute(uniqueAttributeName) === isInjected;
 			});
 		}
 
