@@ -3,8 +3,12 @@
  */
 
 define('eventProvider', [
+		'primaryEvents',
+		'popupEvents',
 		'EventProviderConstants'],
-	function (EventProviderConstants) {
+	function (primaryEvents,
+	          popupEvents,
+	          EventProviderConstants) {
 
 		let bindEventsObject = _createBindEventsObject();
 
@@ -46,7 +50,7 @@ define('eventProvider', [
 		}
 
 		/**
-		 * Returns Object literal with events Listeners anbinds and etc.
+		 * Returns Object literal with events Listeners unbinds and etc.
 		 * @returns {{}}
 		 * @private
 		 */
@@ -57,17 +61,15 @@ define('eventProvider', [
 			// primary (ArrowWrapper)
 			bindEventsObject[_constants.ElementsTypes.primary] = {
 				bindElement: function (el) {
-					let onClickFunction = function(event){
-						_stopBubbling(event);
-						_togglePopup(el.popup);
+					let _onPrimaryClick = function (event) {
+						primaryEvents.click(event, el.popup);
 					};
+					el.primary.addEventListener('click', _onPrimaryClick);
+					el.primary.addEventListener('mouseover', primaryEvents.mouseover);
 
-					el.primary.addEventListener('click', onClickFunction);
-					el.primary.addEventListener('mouseover', _stopBubbling);
-
-					return function (){
-						el.primary.removeEventListener('click', onClickFunction);
-						el.primary.removeEventListener('mouseover', _stopBubbling);
+					return function () {
+						el.primary.removeEventListener('click', primaryEvents.click);
+						el.primary.removeEventListener('mouseover', primaryEvents.mouseover);
 					}
 				}
 			};
@@ -75,37 +77,17 @@ define('eventProvider', [
 			// popup
 			bindEventsObject[_constants.ElementsTypes.popup] = {
 				bindElement: function (popup) {
-					popup.addEventListener('click', _stopBubbling);
-					popup.addEventListener('mouseover', _stopBubbling);
+					popup.addEventListener('click', popupEvents.click);
+					popup.addEventListener('mouseover', popupEvents.mouseover);
 
-					return function (){
-						popup.removeEventListener('click', _stopBubbling);
-						popup.removeEventListener('mouseover', _stopBubbling);
+					return function () {
+						popup.removeEventListener('click', popupEvents.click);
+						popup.removeEventListener('mouseover', popupEvents.mouseover);
 					}
 				}
 			};
+
 			return bindEventsObject;
-		}
-
-		/**
-		 * Toggle the appearance of popup
-		 * @param popup
-		 * @private
-		 */
-		function _togglePopup(popup) {
-			popup.style.display = popup.style.display === "block"
-					? "none"
-					: "block";
-		}
-
-		/**
-		 * Prevent all propagation and default actions
-		 * @param event
-		 * @private
-		 */
-		function _stopBubbling(event){
-			event.preventDefault();
-			event.stopPropagation();
 		}
 	}
 );

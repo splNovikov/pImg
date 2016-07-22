@@ -5,15 +5,15 @@
 define('injector', [
 		'lodash',
 		'ImgSettings',
-		'buttonInjection',
-		'popupInjection',
+		'primary',
+		'popup',
 		'imagesProvider',
 		'eventProviderFacade'],
 
 	function (_,
 	          ImgSettings,
-	          buttonInjection,
-	          popupInjection,
+	          primary,
+	          popup,
 	          imagesProvider,
 	          eventProviderFacade) {
 
@@ -75,16 +75,16 @@ define('injector', [
 			let uniqueName = _createUniqueId();
 			btn.setAttribute(_settings.uniqueAttributeName, uniqueName);
 
-			let popupInjectionNode = _createPopupNode(_settings.pImgSelectors.popup);
+			let popupNode = _createPopupNode(_settings.pImgSelectors.popup);
 			let oldContentNode = _createOldContentNode(btn, _settings.pImgSelectors.oldContent);
-			let injectionToButtonNode = _createInjectionToButtonNode(_settings.pImgSelectors.arrowBlock);
+			let primaryNode = _createInjectionToButtonNode(_settings.pImgSelectors.arrowBlock);
 
-			_createNewContent(btn, _settings.pImgSelectors.primary, popupInjectionNode, oldContentNode, injectionToButtonNode);
+			_createNewContent(btn, _settings.pImgSelectors.primary, popupNode, oldContentNode, primaryNode);
 
 			return {
 				uniqueName,
-				primary: injectionToButtonNode,
-				popup: popupInjectionNode
+				primary: primaryNode,
+				popup: popupNode
 			};
 		}
 
@@ -94,12 +94,11 @@ define('injector', [
 		 * @private
 		 */
 		function _createPopupNode(popupSelector) {
-			let _settings = new ImgSettings();
-			let popupInjectionNode = document.createElement('div');
-			popupInjectionNode.className = popupSelector;
-			let popupInjectionHtml = popupInjection.fillTemplate(popupInjection.getTemplate(), imagesProvider.getImages());
-			popupInjectionNode.innerHTML = popupInjectionHtml;
-			return popupInjectionNode;
+			let popupNode = document.createElement('div');
+			popupNode.className = popupSelector;
+			let popupHtml = popup.fillTemplate(popup.getTemplate(), imagesProvider.getImages());
+			popupNode.innerHTML = popupHtml;
+			return popupNode;
 		}
 
 		/**
@@ -121,25 +120,25 @@ define('injector', [
 		 * @private
 		 */
 		function _createInjectionToButtonNode(arrowBlockSelector) {
-			let injectionToButtonNode = document.createElement('div');
-			injectionToButtonNode.className = arrowBlockSelector;
-			let injectionToButtonHtml = buttonInjection.getTemplate();
-			injectionToButtonNode.innerHTML = injectionToButtonHtml;
-			return injectionToButtonNode;
+			let primaryNode = document.createElement('div');
+			primaryNode.className = arrowBlockSelector;
+			let primaryHtml = primary.getTemplate();
+			primaryNode.innerHTML = primaryHtml;
+			return primaryNode;
 		}
 
 		/**
 		 * @param btn {HTMLButtonElement}
 		 * @param primarySelector {String}
-		 * @param popupInjectionNode {Element}
+		 * @param popupNode {Element}
 		 * @param oldContentNode {Element}
 		 * @param injectionToButtonNode {Element}
 		 * @returns {HTMLButtonElement}
 		 * @private
 		 */
-		function _createNewContent(btn, primarySelector, popupInjectionNode, oldContentNode, injectionToButtonNode) {
+		function _createNewContent(btn, primarySelector, popupNode, oldContentNode, injectionToButtonNode) {
 			let frag = document.createDocumentFragment();
-			frag.appendChild(popupInjectionNode);
+			frag.appendChild(popupNode);
 			frag.appendChild(oldContentNode);
 			frag.appendChild(injectionToButtonNode);
 

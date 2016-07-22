@@ -2,7 +2,7 @@
  * Created by Novikov on 7/14/2016.
  */
 
-define('popupInjection', ['lodash'], function (_) {
+define('popup', ['lodash'], function (_) {
 
 		const template = `
 				<div class="images-container">

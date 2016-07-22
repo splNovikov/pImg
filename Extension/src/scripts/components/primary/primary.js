@@ -2,7 +2,7 @@
  * Created by Novikov on 7/11/2016.
  */
 
-define('buttonInjection', ['lodash'], function (_) {
+define('primary', function () {
 
 		const template = '<span class="arrow-down">&#x25BC</span></div>';
 

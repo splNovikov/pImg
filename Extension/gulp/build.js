@@ -72,7 +72,7 @@
 		return gulp.src([
 				buildSettings.paths.src + '/scripts/providers/**/*.js',
 				buildSettings.paths.src + '/scripts/modules/*.js',
-				buildSettings.paths.src + '/scripts/components/*.js',
+				buildSettings.paths.src + '/scripts/components/**/*.js',
 				buildSettings.paths.src + '/scripts/app.js'])
 			.pipe(plugins.if(isProduction,
 				plugins.babel({
