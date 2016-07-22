@@ -2,7 +2,11 @@
 	float: right;
 }
 
-._im_send {
+.fl_l {
+	float: left;
+}
+
+._im_send, .emulation_btn {
 	padding: 7px 16px 8px;
 	margin: 0;
 	font-size: 12.5px;

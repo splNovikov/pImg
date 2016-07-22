@@ -3,11 +3,11 @@
  */
 
 define('eventProviderFacade', [
-		'ImgSettings',
+		'lodash',
 		'EventProviderConstants',
 		'eventProvider',
 		'bindStorage'],
-	function (ImgSettings,
+	function (_,
 	          EventProviderConstants,
 	          eventProvider,
 	          bindStorage) {
@@ -34,17 +34,15 @@ define('eventProviderFacade', [
 		 * @param leftoverInjectedButtons {Array<HTMLButtonElement>}
 		 */
 		function unbindAbsent(leftoverInjectedButtons) {
-			let _settings = new ImgSettings();
-			let _uniqueItemsNames = _.map(leftoverInjectedButtons, function (button) {
-				return button.getAttribute(_settings.uniqueAttributeName);
-			});
-
 			// find absent
-			let _absent = bindStorage.getAbsentsByUniqueNames(_uniqueItemsNames);
+			let _absent = bindStorage.getAbsents(leftoverInjectedButtons);
 			// unbind array
-			eventProvider.unbindArray(_absent);
+			let _absentArray = _.map(_absent);
+			eventProvider.unbindArray(_absentArray);
+
 			// Remove absent element from bindStorage
-			bindStorage.removeItemsByUniqueNames(_uniqueItemsNames);
+			let _absentKeys = Object.keys(_absent);
+			bindStorage.removeItemsByUniqueNames(_absentKeys);
 		}
 
 	}

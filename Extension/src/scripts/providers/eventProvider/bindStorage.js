@@ -2,12 +2,17 @@
  * Created by Novikov on 7/19/2016.
  */
 
-define('bindStorage', ['lodash'], function (_) {
+define('bindStorage', [
+		'lodash',
+		'ImgSettings'],
+	function (_,
+	          ImgSettings) {
+
 		let _bindStorage = {};
 
 		return {
 			addItem: addItem,
-			getAbsentsByUniqueNames: getAbsentsByUniqueNames,
+			getAbsents: getAbsents,
 			removeItemsByUniqueNames: removeItemsByUniqueNames
 		};
 
@@ -24,12 +29,17 @@ define('bindStorage', ['lodash'], function (_) {
 		 * Get absent and return Array of Objects of unbinds
 		 * @param leftoverInjectedButtons {Array<HTMLButtonElement>}
 		 */
-		function getAbsentsByUniqueNames(uniqueItemsNames) {
-			let absents = _.pick(_bindStorage, function (value, key) {
-				return !_.contains(uniqueItemsNames, key);
+		function getAbsents(leftoverInjectedButtons) {
+			let _settings = new ImgSettings();
+			let _uniqueItemsNames = _.map(leftoverInjectedButtons, function (button) {
+				return button.getAttribute(_settings.uniqueAttributeName);
 			});
 
-			return _.map(absents);
+			let absents = _.pick(_bindStorage, function (value, key) {
+				return !_.contains(_uniqueItemsNames, key);
+			});
+
+			return absents;
 		}
 
 		/**
