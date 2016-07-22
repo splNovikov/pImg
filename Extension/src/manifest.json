@@ -45,7 +45,7 @@
     "http://*/*",
     "https://*/*"
   ],
-  "version": "2.1.0",
+  "version": "2.1.2",
   "web_accessible_resources": [
     "scripts/*",
     "styles/*",
