@@ -25,7 +25,7 @@ define('eventProviderFacade', [
 		 */
 		function bind(el) {
 			let unbindPrimary = eventProvider.bind(_constants.ElementsTypes.primary, el);
-			let unbindPopup = eventProvider.bind(_constants.ElementsTypes.popup, el.popup);
+			let unbindPopup = eventProvider.bind(_constants.ElementsTypes.popup, el);
 			bindStorage.addItem(el.uniqueName, {unbindPrimary, unbindPopup});
 		}
 

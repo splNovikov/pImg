@@ -23,8 +23,8 @@ define('eventProvider', [
 		 * @param el
 		 * @returns {*}
 		 */
-		function bind(type, el) {
-			return bindEventsObject[type].bindElement(el);
+		function bind(type, nodeElements) {
+			return bindEventsObject[type].bindElement(nodeElements);
 		}
 
 		/**
@@ -60,29 +60,32 @@ define('eventProvider', [
 
 			// primary (ArrowWrapper)
 			bindEventsObject[_constants.ElementsTypes.primary] = {
-				bindElement: function (el) {
+				bindElement: function (nodeElements) {
 					let _onPrimaryClick = function (event) {
-						primaryEvents.click(event, el.popup);
+						primaryEvents.click(event, nodeElements);
 					};
-					el.primary.addEventListener('click', _onPrimaryClick);
-					el.primary.addEventListener('mouseover', primaryEvents.mouseover);
+					nodeElements.primary.addEventListener('click', _onPrimaryClick);
+					nodeElements.primary.addEventListener('mouseover', primaryEvents.mouseover);
 
 					return function () {
-						el.primary.removeEventListener('click', primaryEvents.click);
-						el.primary.removeEventListener('mouseover', primaryEvents.mouseover);
+						nodeElements.primary.removeEventListener('click', primaryEvents.click);
+						nodeElements.primary.removeEventListener('mouseover', primaryEvents.mouseover);
 					}
 				}
 			};
 
 			// popup
 			bindEventsObject[_constants.ElementsTypes.popup] = {
-				bindElement: function (popup) {
-					popup.addEventListener('click', popupEvents.click);
-					popup.addEventListener('mouseover', popupEvents.mouseover);
+				bindElement: function (nodeElements) {
+					let _onPopupClick = function (event) {
+						popupEvents.click(event, nodeElements);
+					};
+					nodeElements.popup.addEventListener('click', _onPopupClick);
+					nodeElements.popup.addEventListener('mouseover', popupEvents.mouseover);
 
 					return function () {
-						popup.removeEventListener('click', popupEvents.click);
-						popup.removeEventListener('mouseover', popupEvents.mouseover);
+						nodeElements.popup.removeEventListener('click', _onPopupClick);
+						nodeElements.popup.removeEventListener('mouseover', popupEvents.mouseover);
 					}
 				}
 			};

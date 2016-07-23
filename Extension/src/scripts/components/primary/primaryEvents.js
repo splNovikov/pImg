@@ -2,7 +2,7 @@
  * Created by Novikov on 7/14/2016.
  */
 
-define('primaryEvents', function () {
+define('primaryEvents',['popupEvents'], function (popupEvents) {
 	return {
 		click: click,
 		mouseover: mouseover
@@ -10,30 +10,19 @@ define('primaryEvents', function () {
 
 	/**
 	 * On primary element (arrow) click event
-	 * @param event
-	 * @param popup
+	 * @param event {Event}
+	 * @param nodeElements {Object}
 	 */
-	function click(event, popup) {
+	function click(event, nodeElements) {
 		event.stopPropagation();
-		_togglePopup(popup);
+		popupEvents.togglePopup(nodeElements.popup);
 	}
 
 	/**
 	 * On primary element (arrow) mouseover event
-	 * @param event
+	 * @param event {Event}
 	 */
 	function mouseover(event) {
 		event.stopPropagation();
-	}
-
-	/**
-	 * Toggle the appearance of popup
-	 * @param popup
-	 * @private
-	 */
-	function _togglePopup(popup) {
-		popup.style.display = popup.style.display === "block"
-			? "none"
-			: "block";
 	}
 });

@@ -21,7 +21,13 @@ define('ImgSettings', [], function () {
 				};
 				this.uniqueAttributeName = 'data-pimg-unique-name';
 				this.vkElements = {
-					sendButtonsSelectors: ['button._im_send', 'button.addpost_button']
+					sendButtonsSelectors: ['button._im_send', 'button.addpost_button'],
+					imEditableSelectors: [
+						'div.im_editable',
+						'div.im-chat-input--text',
+						'div._im_text',
+						'div.reply_field',
+						'div.submit_post_field']
 				};
 
 				instance = this;

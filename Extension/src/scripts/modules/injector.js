@@ -4,6 +4,7 @@
 
 define('injector', [
 		'lodash',
+		'finder',
 		'ImgSettings',
 		'primary',
 		'popup',
@@ -11,6 +12,7 @@ define('injector', [
 		'eventProviderFacade'],
 
 	function (_,
+	          finder,
 	          ImgSettings,
 	          primary,
 	          popup,
@@ -19,8 +21,7 @@ define('injector', [
 
 		return {
 			makeHtmlInjectionAndBindings: makeHtmlInjectionAndBindings,
-			filterInjectedButtons: filterInjectedButtons,
-			findSendButtons: findSendButtons
+			filterInjectedButtons: filterInjectedButtons
 		};
 
 		/**
@@ -30,8 +31,14 @@ define('injector', [
 		 * @returns {*}
 		 */
 		function makeHtmlInjectionAndBindings(notInjectedButtons) {
-			let elements = _injectToButton(notInjectedButtons[0]);
-			eventProviderFacade.bind(elements);
+			let _settings = new ImgSettings();
+			let _btn = notInjectedButtons[0];
+			let _newNodeElements = _crateNewNodeElements(_btn, _settings);
+
+			// html injection:
+			_injectNodeElementsToButton(_btn, _newNodeElements, _settings.pImgSelectors.primary);
+			// and bindings:
+			eventProviderFacade.bind(_newNodeElements);
 
 			let slicedArray = notInjectedButtons.slice(1);
 			if (slicedArray.length !== 0) {
@@ -42,7 +49,7 @@ define('injector', [
 		/**
 		 * Filters from send buttons -
 		 * returns only not "injected buttons" or only "injected"
-		 * @param sendBtnArr {Array}
+		 * @param sendBtnArr {NodeList}
 		 * @param uniqueAttributeName {String}
 		 * @param isInjected {Boolean} - true -> return injected; false -> return not injected
 		 * @returns {Array}
@@ -55,36 +62,26 @@ define('injector', [
 		}
 
 		/**
-		 * Find all buttons with selectors from buttonsSelectors
-		 * @param buttonsSelectors {Array}
-		 * @returns {Array.<T>}
-		 * @private
-		 */
-		function findSendButtons(buttonsSelectors) {
-			return Array.prototype.slice.call(document.querySelectorAll(buttonsSelectors));
-		}
-
-		/**
-		 * Injecting html to button
+		 * Creates new nodes for button
 		 * @param btn {HTMLButtonElement} - current button for injection
+		 * @param imgSettings {Object}
 		 * @private
 		 */
-		function _injectToButton(btn) {
-			let _settings = new ImgSettings();
-
+		function _crateNewNodeElements(btn, imgSettings) {
 			let uniqueName = _createUniqueId();
-			btn.setAttribute(_settings.uniqueAttributeName, uniqueName);
+			btn.setAttribute(imgSettings.uniqueAttributeName, uniqueName);
 
-			let popupNode = _createPopupNode(_settings.pImgSelectors.popup);
-			let oldContentNode = _createOldContentNode(btn, _settings.pImgSelectors.oldContent);
-			let primaryNode = _createInjectionToButtonNode(_settings.pImgSelectors.arrowBlock);
-
-			_createNewContent(btn, _settings.pImgSelectors.primary, popupNode, oldContentNode, primaryNode);
+			let popupNode = _createPopupNode(imgSettings.pImgSelectors.popup);
+			let oldContentNode = _createOldContentNode(btn, imgSettings.pImgSelectors.oldContent);
+			let primaryNode = _createInjectionToButtonNode(imgSettings.pImgSelectors.arrowBlock);
+			let imEditable = finder.getImEditableForEl(btn, imgSettings.vkElements.imEditableSelectors, 3);
 
 			return {
 				uniqueName,
 				primary: primaryNode,
-				popup: popupNode
+				oldContent: oldContentNode,
+				popup: popupNode,
+				imEditable: imEditable
 			};
 		}
 
@@ -96,8 +93,7 @@ define('injector', [
 		function _createPopupNode(popupSelector) {
 			let popupNode = document.createElement('div');
 			popupNode.className = popupSelector;
-			let popupHtml = popup.fillTemplate(popup.getTemplate(), imagesProvider.getImages());
-			popupNode.innerHTML = popupHtml;
+			popupNode.innerHTML = popup.fillTemplate(popup.getTemplate(), imagesProvider.getImages());
 			return popupNode;
 		}
 
@@ -122,25 +118,22 @@ define('injector', [
 		function _createInjectionToButtonNode(arrowBlockSelector) {
 			let primaryNode = document.createElement('div');
 			primaryNode.className = arrowBlockSelector;
-			let primaryHtml = primary.getTemplate();
-			primaryNode.innerHTML = primaryHtml;
+			primaryNode.innerHTML = primary.getTemplate();
 			return primaryNode;
 		}
 
 		/**
 		 * @param btn {HTMLButtonElement}
 		 * @param primarySelector {String}
-		 * @param popupNode {Element}
-		 * @param oldContentNode {Element}
-		 * @param injectionToButtonNode {Element}
+		 * @param nodes {Object}
 		 * @returns {HTMLButtonElement}
 		 * @private
 		 */
-		function _createNewContent(btn, primarySelector, popupNode, oldContentNode, injectionToButtonNode) {
+		function _injectNodeElementsToButton(btn, nodes, primarySelector) {
 			let frag = document.createDocumentFragment();
-			frag.appendChild(popupNode);
-			frag.appendChild(oldContentNode);
-			frag.appendChild(injectionToButtonNode);
+			frag.appendChild(nodes.popup);
+			frag.appendChild(nodes.oldContent);
+			frag.appendChild(nodes.primary);
 
 			btn.className += ` ${primarySelector}`;
 			btn.innerHTML = '';
