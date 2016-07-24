@@ -7,7 +7,6 @@
 	});
 	var del = require('del');
 	var buildSettings = gulp.buildSettings;
-	var isProduction = gulp.buildSettings.environment === gulp.environments.prod;
 
 	gulp.task('build', function (done) {
 		plugins.runSequence(['misc', 'sass', 'html'], 'bowerConcat', 'copyBackgroundJS', 'copyAppJS', done);
@@ -64,7 +63,7 @@
 			.pipe(plugins.babel({
 				presets: ['es2015']
 			}))
-			.pipe(plugins.if(isProduction, plugins.uglify()))
+			.pipe(plugins.if(buildSettings.isProduction, plugins.uglify()))
 			.pipe(gulp.dest(buildSettings.environment.dest + '/scripts/app'));
 	});
 
@@ -74,12 +73,12 @@
 				buildSettings.paths.src + '/scripts/modules/*.js',
 				buildSettings.paths.src + '/scripts/components/**/*.js',
 				buildSettings.paths.src + '/scripts/app.js'])
-			.pipe(plugins.if(isProduction,
+			.pipe(plugins.if(buildSettings.isProduction,
 				plugins.babel({
 					presets: ['es2015']
 				})))
 			.pipe(plugins.concat('app.js'))
-			.pipe(plugins.if(isProduction, plugins.uglify()))
+			.pipe(plugins.if(buildSettings.isProduction, plugins.uglify()))
 			.pipe(gulp.dest(buildSettings.environment.dest + '/scripts/app'));
 	});
 

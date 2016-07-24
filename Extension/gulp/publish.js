@@ -35,4 +35,5 @@ gulp.task('zipPublish', function () {
 
 function _setPublishSettings(env) {
 	gulp.buildSettings.environment = env;
+	gulp.buildSettings.isProduction = env === gulp.environments.prod;
 }
