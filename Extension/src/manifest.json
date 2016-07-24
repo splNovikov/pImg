@@ -28,7 +28,6 @@
       "run_at": "document_end"
     }
   ],
-  //"default_locale": "ru",
   "description": "Paste image to chat extension",
   "icons": {
     "16": "images/icons/icon16.png",
