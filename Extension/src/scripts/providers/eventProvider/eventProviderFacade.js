@@ -21,12 +21,12 @@ define('eventProviderFacade', [
 
 		/**
 		 * Add bindings to element add put unBindings to bindStorage
-		 * @param el -> {uniqueName, primary, popup}
+		 * @param nodeElements -> {uniqueName, primary, popup}
 		 */
-		function bind(el) {
-			let unbindPrimary = eventProvider.bind(_constants.ElementsTypes.primary, el);
-			let unbindPopup = eventProvider.bind(_constants.ElementsTypes.popup, el);
-			bindStorage.addItem(el.uniqueName, {unbindPrimary, unbindPopup});
+		function bind(nodeElements) {
+			let unbindPrimary = eventProvider.bind(_constants.ElementsTypes.primary, nodeElements);
+			let unbindPopup = eventProvider.bind(_constants.ElementsTypes.popup, nodeElements);
+			bindStorage.addItem(nodeElements.uniqueName, {unbindPrimary, unbindPopup});
 		}
 
 		/**

@@ -53,6 +53,8 @@ define('bindStorage', [
 				return;
 			}
 			delete _bindStorage[uniqueItemsNames[0]];
+			console.info(`p-img: button ${uniqueItemsNames[0]} has been removed.`);
+
 			slicedArray = uniqueItemsNames.slice(1);
 			return removeItemsByUniqueNames(slicedArray);
 		}

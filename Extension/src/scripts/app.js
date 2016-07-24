@@ -56,19 +56,3 @@ require([
 			polling(newPollingMs);
 		}
 	});
-
-
-//        $arrow.click(function (event) {
-//            window.pImgExt.imEditable = $("div[id^='im_editable']:visible");
-//        });
-
-//        $('html').click(function (event) {
-//            _showHideImImagesMenu({'event': event, 'pImgPopup': $pImgPopup, 'hardlyHide': true});
-//        });
-
-//        $imageWrapper.click(function (event) {
-//            var src = $(event.target).attr('src');
-//
-//        });
-
-//    }

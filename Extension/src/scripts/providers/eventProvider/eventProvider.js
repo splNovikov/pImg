@@ -20,7 +20,7 @@ define('eventProvider', [
 		/**
 		 * Add event listeners to items and return unbind
 		 * @param type
-		 * @param el
+		 * @param nodeElements
 		 * @returns {*}
 		 */
 		function bind(type, nodeElements) {
@@ -38,12 +38,14 @@ define('eventProvider', [
 				return;
 			}
 
-			if (typeof absent[0].unbindPrimary === "function") {
-				absent[0].unbindPrimary();
+			let _absentBtn = absent[0];
+			if (typeof _absentBtn.unbindPrimary === "function") {
+				_absentBtn.unbindPrimary();
 			}
-			if (typeof absent[0].unbindPopup === "function") {
-				absent[0].unbindPopup();
+			if (typeof _absentBtn.unbindPopup === "function") {
+				_absentBtn.unbindPopup();
 			}
+			console.info('p-img: button has been unbound.');
 
 			slicedAbsent = absent.slice(1);
 			return unbindArray(slicedAbsent);
