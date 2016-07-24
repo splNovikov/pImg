@@ -13,8 +13,8 @@ define('imagesProvider', function () {
 	 */
 	function getImages() {
 		return [
-			{title:'Костя gif', path: 'https://new.vk.com/doc4308777_437675984?hash=f674ace2cd90d0c665&dl=274d4abce3cb485c39/'},
-			{title:'boobs gif', path: 'http://static1.fjcdn.com/thumbnails/comments/Lamangalamat+used+roll+picture+lamangalamat+rolled+image+i+found+one+_daec7902532889cd7f0a0e2a1ac27f6a.gif'},
+			//{title:'Костя gif', path: 'https://new.vk.com/doc4308777_437675984?hash=f674ace2cd90d0c665&dl=274d4abce3cb485c39/'},
+			//{title:'boobs gif', path: 'http://static1.fjcdn.com/thumbnails/comments/Lamangalamat+used+roll+picture+lamangalamat+rolled+image+i+found+one+_daec7902532889cd7f0a0e2a1ac27f6a.gif'},
 			{title: 'Ах ты ублюдок', path: 'https://pp.vk.me/c624623/v624623651/47cc3/gWV6uQ3oXLo.jpg'},
 			{title: 'Вы зануда Серёжа', path: 'https://pp.vk.me/c630622/v630622505/1be2/7yMqLNuFXOA.jpg'},
 			{title: 'Ща лопну от смеха', path: 'http://cs7010.vk.me/v7010894/306a/CgYg2CXAsGo.jpg'},
