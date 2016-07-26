@@ -70,7 +70,7 @@ define('eventProvider', [
 					nodeElements.primary.addEventListener('mouseover', primaryEvents.mouseover);
 
 					return function () {
-						nodeElements.primary.removeEventListener('click', primaryEvents.click);
+						nodeElements.primary.removeEventListener('click', _onPrimaryClick);
 						nodeElements.primary.removeEventListener('mouseover', primaryEvents.mouseover);
 					}
 				}

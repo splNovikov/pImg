@@ -2,7 +2,7 @@
  * Created by Novikov on 7/14/2016.
  */
 
-define('primaryEvents',['popupEvents'], function (popupEvents) {
+define('primaryEvents', ['popupEvents'], function (popupEvents) {
 	return {
 		click: click,
 		mouseover: mouseover
