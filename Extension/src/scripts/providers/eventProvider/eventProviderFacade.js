@@ -15,29 +15,49 @@ define('eventProviderFacade', [
 		let _constants = new EventProviderConstants();
 
 		return {
-			bind: bind,
+			bindPrimary: bindPrimary,
+			bindPopup: bindPopup,
 			unbindAbsent: unbindAbsent
 		};
 
 		/**
-		 * Add bindings to element add put unBindings to bindStorage
-		 * @param nodeElements -> {uniqueName, primary, popup}
+		 * Add listeners to primary element (arrow)
+		 * @param uniqueName {String}
+		 * @param primary {Element}
+		 * @param popup {Element}
+		 * @public
 		 */
-		function bind(nodeElements) {
-			let unbindPrimary = eventProvider.bind(_constants.ElementsTypes.primary, nodeElements);
-			let unbindPopup = eventProvider.bind(_constants.ElementsTypes.popup, nodeElements);
-			bindStorage.addItem(nodeElements.uniqueName, {unbindPrimary, unbindPopup});
+		function bindPrimary(uniqueName, primary, popup) {
+			let _unbindPrimary = eventProvider.bind(_constants.ElementsTypes.primary, {primary, popup});
+			bindStorage.addItem(uniqueName, _unbindPrimary);
+		}
+
+		/**
+		 * Add listeners to popup element
+		 * @param uniqueName {String}
+		 * @param popup {Element}
+		 * @param popupNodes {Object}
+		 * @param imEditable {Element}
+		 * @public
+		 */
+		function bindPopup(uniqueName, popup, popupNodes, imEditable) {
+			let _unbindPopup = eventProvider.bind(_constants.ElementsTypes.popup, {popup, popupNodes, imEditable});
+			bindStorage.addItem(uniqueName, _unbindPopup);
 		}
 
 		/**
 		 * Unbind absent elements and remove them from bindStorage
-		 * @param leftoverInjectedButtons {Array<HTMLButtonElement>}
+		 * @param leftoverInjectedButtons {Array<Element>}
+		 * @public
 		 */
 		function unbindAbsent(leftoverInjectedButtons) {
-			// find absent
+			// find absent ( _absent --> Object with array of callbacks)
 			let _absent = bindStorage.getAbsents(leftoverInjectedButtons);
-			// unbind array
+			// unbind array (_absentArray --> array with arrays of callbacks)
 			let _absentArray = _.map(_absent);
+			if (_absentArray.length === 0) {
+				return;
+			}
 			eventProvider.unbindArray(_absentArray);
 
 			// Remove absent element from bindStorage

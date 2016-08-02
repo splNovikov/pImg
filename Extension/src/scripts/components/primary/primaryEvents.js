@@ -11,11 +11,11 @@ define('primaryEvents', ['popupEvents'], function (popupEvents) {
 	/**
 	 * On primary element (arrow) click event
 	 * @param event {Event}
-	 * @param nodeElements {Object}
+	 * @param popup
 	 */
-	function click(event, nodeElements) {
+	function click(event, popup) {
 		event.stopPropagation();
-		popupEvents.togglePopup(nodeElements.popup);
+		popupEvents.togglePopup(popup);
 	}
 
 	/**

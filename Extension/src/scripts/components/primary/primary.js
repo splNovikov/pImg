@@ -2,21 +2,42 @@
  * Created by Novikov on 7/11/2016.
  */
 
-define('primary', function () {
+define('primary', [
+		'eventProviderFacade',
+		'ImgSettings'],
+	function (eventProviderFacade,
+	          ImgSettings) {
 
-		const template = '<span class="arrow-down">&#x25BC</span></div>';
+		const _template = '<span class="arrow-down">&#x25BC</span></div>';
 
 		return {
-			getTemplate: getTemplate
+			create: create
 		};
 
 		/**
-		 * Returns template
-		 * @public
-		 * @returns {String}
+		 * Create primary element and add eventListeners
+		 * @param uniqueName {String}
+		 * @param popup {Element}
+		 * @returns {Element}
 		 */
-		function getTemplate() {
-			return template.trim();
+		function create(uniqueName, popup) {
+			let _primaryNode = _createPrimaryNode();
+			eventProviderFacade.bindPrimary(uniqueName, _primaryNode, popup);
+			return _primaryNode;
+		}
+
+		/**
+		 * Helper to create primary element
+		 * @returns {Element}
+		 * @private
+		 */
+		function _createPrimaryNode() {
+			let _settings = new ImgSettings();
+			let _primaryNode = document.createElement('div');
+			_primaryNode.className = _settings.pImgSelectors.arrowBlock;
+			_primaryNode.innerHTML = _template;
+
+			return _primaryNode;
 		}
 
 	}

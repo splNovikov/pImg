@@ -14,6 +14,9 @@
 
 	gulp.task('_watchAppJS', ['setDevEnv'], function (done) {
 		gulp.watch(buildSettings.paths.src + '/scripts/**/*.js', ['copyAppJS'], done);
+		gulp.watch([
+			buildSettings.paths.src + '/styles/**/*.scss',
+			buildSettings.paths.src + '/scripts/components/**/*.scss'], ['sass'], done);
 	});
 
 	gulp.task('misc', function () {
@@ -24,8 +27,16 @@
 	});
 
 	gulp.task('sass', function () {
-		return gulp.src(buildSettings.paths.src + '/styles/*.scss')
+		return gulp.src([
+				buildSettings.paths.src + '/styles/main.scss',
+				buildSettings.paths.src + '/scripts/components/**/*.scss'])
+			.pipe(plugins.autoprefixer())
+			.on('error', function (error) {
+				console.error(error);
+				this.emit('end');
+			})
 			.pipe(plugins.sass({outputStyle: 'compressed'}))
+			.pipe(plugins.concat('main.css'))
 			.pipe(plugins.rename({
 				suffix: ".min"
 			}))

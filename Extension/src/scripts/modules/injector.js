@@ -4,23 +4,15 @@
 
 define('injector', [
 		'lodash',
-		'finder',
-		'ImgSettings',
-		'primary',
-		'popup',
-		'imagesProvider',
-		'eventProviderFacade'],
+		'combineFabric',
+		'ImgSettings'],
 
 	function (_,
-	          finder,
-	          ImgSettings,
-	          primary,
-	          popup,
-	          imagesProvider,
-	          eventProviderFacade) {
+	          combineFabric,
+	          ImgSettings) {
 
 		return {
-			makeHtmlInjectionAndBindings: makeHtmlInjectionAndBindings,
+			makeHtmlInjection: makeHtmlInjection,
 			filterInjectedButtons: filterInjectedButtons
 		};
 
@@ -30,19 +22,16 @@ define('injector', [
 		 * @public
 		 * @returns {*}
 		 */
-		function makeHtmlInjectionAndBindings(notInjectedButtons) {
+		function makeHtmlInjection(notInjectedButtons) {
 			let _settings = new ImgSettings();
 			let _btn = notInjectedButtons[0];
-			let _newNodeElements = _crateNewNodeElements(_btn, _settings);
+			let _uniqueName = _createUniqueId();
+			_btn.setAttribute(_settings.uniqueAttributeName, _uniqueName);
+			combineFabric.injectHtml(_btn, _uniqueName);
 
-			// html injection:
-			_injectNodeElementsToButton(_btn, _newNodeElements, _settings.pImgSelectors.primary);
-			// and bindings:
-			eventProviderFacade.bind(_newNodeElements);
-
-			let slicedArray = notInjectedButtons.slice(1);
-			if (slicedArray.length !== 0) {
-				return makeHtmlInjectionAndBindings(slicedArray);
+			let _slicedArray = notInjectedButtons.slice(1);
+			if (_slicedArray.length !== 0) {
+				return makeHtmlInjection(_slicedArray);
 			}
 		}
 
@@ -59,87 +48,6 @@ define('injector', [
 			return _.filter(sendBtnArr, function (sendBtn) {
 				return sendBtn.hasAttribute(uniqueAttributeName) === isInjected;
 			});
-		}
-
-		/**
-		 * Creates new nodes for button
-		 * @param btn {HTMLButtonElement} - current button for injection
-		 * @param imgSettings {Object}
-		 * @private
-		 */
-		function _crateNewNodeElements(btn, imgSettings) {
-			let uniqueName = _createUniqueId();
-			btn.setAttribute(imgSettings.uniqueAttributeName, uniqueName);
-
-			let popupNode = _createPopupNode(imgSettings.pImgSelectors.popup);
-			let oldContentNode = _createOldContentNode(btn, imgSettings.pImgSelectors.oldContent);
-			let primaryNode = _createInjectionToButtonNode(imgSettings.pImgSelectors.arrowBlock);
-			let imEditable = finder.getImEditableForEl(btn, imgSettings.vkElements.imEditableSelectors, 3);
-
-			return {
-				uniqueName,
-				primary: primaryNode,
-				oldContent: oldContentNode,
-				popup: popupNode,
-				imEditable: imEditable
-			};
-		}
-
-		/**
-		 * @param popupSelector
-		 * @returns {Element}
-		 * @private
-		 */
-		function _createPopupNode(popupSelector) {
-			let popupNode = document.createElement('div');
-			popupNode.className = popupSelector;
-			popupNode.innerHTML = popup.fillTemplate(popup.getTemplate(), imagesProvider.getImages());
-			return popupNode;
-		}
-
-		/**
-		 * @param btn {HTMLButtonElement}
-		 * @param oldContentSelector {String}
-		 * @returns {Element}
-		 * @private
-		 */
-		function _createOldContentNode(btn, oldContentSelector) {
-			let oldContentNode = document.createElement('div');
-			oldContentNode.className = oldContentSelector;
-			oldContentNode.innerHTML = btn.innerHTML;
-			return oldContentNode;
-		}
-
-		/**
-		 * @param arrowBlockSelector {String}
-		 * @returns {Element}
-		 * @private
-		 */
-		function _createInjectionToButtonNode(arrowBlockSelector) {
-			let primaryNode = document.createElement('div');
-			primaryNode.className = arrowBlockSelector;
-			primaryNode.innerHTML = primary.getTemplate();
-			return primaryNode;
-		}
-
-		/**
-		 * @param btn {HTMLButtonElement}
-		 * @param primarySelector {String}
-		 * @param nodes {Object}
-		 * @returns {HTMLButtonElement}
-		 * @private
-		 */
-		function _injectNodeElementsToButton(btn, nodes, primarySelector) {
-			let frag = document.createDocumentFragment();
-			frag.appendChild(nodes.popup);
-			frag.appendChild(nodes.oldContent);
-			frag.appendChild(nodes.primary);
-
-			btn.className += ` ${primarySelector}`;
-			btn.innerHTML = '';
-			btn.appendChild(frag);
-
-			return btn;
 		}
 
 		/**

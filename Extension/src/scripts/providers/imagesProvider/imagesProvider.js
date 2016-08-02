@@ -16,9 +16,9 @@ define('imagesProvider', function () {
 			//{title:'Костя gif', path: 'https://psv4.vk.me/c415119/u4308777/docs/f6a1721c399a/20160705_113235.gif'},
 			//{title:'boobs gif', path: 'http://static1.fjcdn.com/thumbnails/comments/Lamangalamat+used+roll+picture+lamangalamat+rolled+image+i+found+one+_daec7902532889cd7f0a0e2a1ac27f6a.gif'},
 
-			{title: 'Bla bla bla by Chandler M Bing', path: 'http://25.media.tumblr.com/tumblr_m83mmxbO5w1qh01r8o1_400.gif'},
+			{title: 'Bla bla bla by Chandler M Bing', path: 'https://25.media.tumblr.com/tumblr_m83mmxbO5w1qh01r8o1_400.gif'},
 			{title: 'Todd high five', path: 'http://cs5.pikabu.ru/images/big_size_comm_an/2014-11_4/14165047217700.gif'},
-			{title: 'How u doing', path: 'http://24.media.tumblr.com/tumblr_m8rjytqrGK1r6g1koo1_500.gif'},
+			{title: 'How u doing', path: 'https://24.media.tumblr.com/tumblr_m8rjytqrGK1r6g1koo1_500.gif'},
 			{title: 'Yeah baby!!!', path: 'http://leproimg.com/2133451'},
 			{title: 'Конькобежка --> Бля!!!', path: 'http://s1.developerslife.ru/public/images/gifs/baca2286-d5d5-44d0-a072-808da581f18e.gif'},
 			{title: '(wall)', path: 'http://s1.developerslife.ru/public/images/gifs/f3dda35f-a0c9-48db-baf1-7f39e0858e1b.gif'},

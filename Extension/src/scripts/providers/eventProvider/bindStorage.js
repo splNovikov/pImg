@@ -22,7 +22,9 @@ define('bindStorage', [
 		 * @param unbind
 		 */
 		function addItem(uniqueName, unbind) {
-			_bindStorage[uniqueName] = unbind;
+			_bindStorage[uniqueName]
+					? _bindStorage[uniqueName].push(unbind)
+					: _bindStorage[uniqueName] = [unbind];
 		}
 
 		/**
@@ -35,11 +37,9 @@ define('bindStorage', [
 				return button.getAttribute(_settings.uniqueAttributeName);
 			});
 
-			let absents = _.pick(_bindStorage, function (value, key) {
+			return _.pick(_bindStorage, function (value, key) {
 				return !_.contains(_uniqueItemsNames, key);
 			});
-
-			return absents;
 		}
 
 		/**

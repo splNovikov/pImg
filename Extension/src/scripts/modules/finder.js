@@ -2,7 +2,7 @@
  * Created by Novikov on 7/23/2016.
  */
 
-define('finder', function () {
+define('htmlFinder', function () {
 
 		return {
 			findSendButtons: findSendButtons,

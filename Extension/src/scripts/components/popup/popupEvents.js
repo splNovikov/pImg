@@ -4,17 +4,22 @@
 
 define('popupEvents', function () {
 	return {
-		click: click,
+		imagesContainerClick: imagesContainerClick,
+		onHeaderClick: onHeaderClick,
+		onPopupClick: onPopupClick,
 		mouseover: mouseover,
 		togglePopup: togglePopup
 	};
 
 	/**
-	 * On popup click event
+	 * On images container click event
 	 * @param event {Event}
-	 * @param nodeElements {Object}
+	 * @param popup {Element}
+	 * @param imEditable {Element}
+	 * @returns {null}
+	 * @public
 	 */
-	function click(event, nodeElements) {
+	function imagesContainerClick(event, popup, imEditable) {
 		event.stopPropagation();
 
 		let src = event.target.src;
@@ -27,12 +32,33 @@ define('popupEvents', function () {
 		// If we will not do this - this picture will be inserted too.
 		_copyTextToClipboard(' ');
 
-		nodeElements.imEditable.focus();
+		imEditable.focus();
 
 		// emulation VK behavior
 		document.execCommand('insertText', false, src + ' ');
 		document.execCommand('paste');
-		togglePopup(nodeElements.popup);
+		togglePopup(popup);
+	}
+
+	/**
+	 * On popup header click event
+	 * @param event {Event}
+	 * @param popup {Element}
+	 */
+	function onHeaderClick(event, popup){
+		event.stopPropagation();
+
+		if (event.target.classList.contains('close-icon')){
+			togglePopup(popup);
+		}
+	}
+
+	/**
+	 * On popup click event
+	 * @param event {Event}
+	 */
+	function onPopupClick(event){
+		event.stopPropagation();
 	}
 
 	/**
@@ -54,6 +80,12 @@ define('popupEvents', function () {
 			: "block";
 	}
 
+	/**
+	 * Mechanism which puts text to clipboard
+	 * http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
+	 * @param text {String}
+	 * @private
+	 */
 	function _copyTextToClipboard(text) {
 		let _textArea = document.createElement("textarea");
 		_textArea.value = text;

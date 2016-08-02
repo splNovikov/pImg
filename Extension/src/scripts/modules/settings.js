@@ -13,10 +13,11 @@ define('ImgSettings', [], function () {
 					return instance;
 				}
 
+				this.extensionName = 'Paste images to chat';
 				this.pImgSelectors = {
 					primary: 'paste-img',
-					arrowBlock: 'p-img-arrow',
-					oldContent: 'old-content-wrapper',
+					arrowBlock: 'p-img-primary',
+					oldContent: 'p-img-old-content-wrapper',
 					popup: 'p-img-popup'
 				};
 				this.uniqueAttributeName = 'data-pimg-unique-name';

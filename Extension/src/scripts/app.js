@@ -1,10 +1,10 @@
 require([
 		'ImgSettings',
-		'finder',
+		'htmlFinder',
 		'injector',
 		'eventProviderFacade'],
 	function (ImgSettings,
-	          finder,
+	          htmlFinder,
 	          injector,
 	          eventProviderFacade) {
 
@@ -18,7 +18,7 @@ require([
 			polling.currentMs = ms;
 			polling.interval = setInterval(function () {
 				// find all send buttons
-				let sendBtnArr = finder.findSendButtons(_settings.vkElements.sendButtonsSelectors);
+				let sendBtnArr = htmlFinder.findSendButtons(_settings.vkElements.sendButtonsSelectors);
 
 				// if there are no any button -> restart polling
 				if (sendBtnArr.length === 0) {
@@ -37,7 +37,7 @@ require([
 				// if found - setPolling to Long and make injection to the new buttons
 				if (notInjectedButtons.length !== 0) {
 					_restartPolling(polling, _longPollingMs);
-					injector.makeHtmlInjectionAndBindings(notInjectedButtons);
+					injector.makeHtmlInjection(notInjectedButtons);
 				}
 			}, ms);
 		}
