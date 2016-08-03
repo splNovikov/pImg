@@ -1,9 +1,7 @@
 @import "../../../styles/basics/colors";
 
-$primary-width: 30px;
-
 .p-img-old-content-wrapper {
-  margin-right: $primary-width;
+  margin-right: 20px;
 }
 
 .p-img-primary {
@@ -11,7 +9,7 @@ $primary-width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: $primary-width;
+  width: 25px;
   right: 0;
   top: 0;
   height: 100%;
