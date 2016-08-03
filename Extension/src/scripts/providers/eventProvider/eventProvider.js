@@ -92,20 +92,25 @@ define('eventProvider', [
 
 			// popup
 			bindEventsObject[_constants.ElementsTypes.popup] = {
+				// nodeElements --> { popup, popupNodes, imEditable }
 				bindElement: function (nodeElements) {
-					// nodeElements --> { popup, popupNodes, imEditable }
+					let _immediateClosePopup = function () {
+						popupEvents.togglePopup(nodeElements.popup, true);
+					};
 					let _onImagesContainerClick = function (event) {
 						popupEvents.imagesContainerClick(event, nodeElements.popup, nodeElements.imEditable);
 					};
 					let _onHeaderClick = function (event) {
 						popupEvents.onHeaderClick(event, nodeElements.popup);
 					};
+					document.addEventListener('click', _immediateClosePopup);
 					nodeElements.popupNodes.imagesContainer.addEventListener('click', _onImagesContainerClick);
 					nodeElements.popupNodes.header.addEventListener('click', _onHeaderClick);
 					nodeElements.popup.addEventListener('click', popupEvents.onPopupClick);
 					nodeElements.popup.addEventListener('mouseover', popupEvents.mouseover);
 
 					return function () {
+						document.removeEventListener('click', _immediateClosePopup);
 						nodeElements.popupNodes.imagesContainer.removeEventListener('click', _onImagesContainerClick);
 						nodeElements.popupNodes.header.removeEventListener('click', _onHeaderClick);
 						nodeElements.popup.removeEventListener('click', popupEvents.onPopupClick);

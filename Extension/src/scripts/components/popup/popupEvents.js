@@ -45,10 +45,10 @@ define('popupEvents', function () {
 	 * @param event {Event}
 	 * @param popup {Element}
 	 */
-	function onHeaderClick(event, popup){
+	function onHeaderClick(event, popup) {
 		event.stopPropagation();
 
-		if (event.target.classList.contains('close-icon')){
+		if (event.target.classList.contains('close-icon')) {
 			togglePopup(popup);
 		}
 	}
@@ -57,7 +57,7 @@ define('popupEvents', function () {
 	 * On popup click event
 	 * @param event {Event}
 	 */
-	function onPopupClick(event){
+	function onPopupClick(event) {
 		event.stopPropagation();
 	}
 
@@ -72,12 +72,17 @@ define('popupEvents', function () {
 	/**
 	 * Toggle the appearance of popup
 	 * @param popup
+	 * @param immediateClose {Boolean?}
 	 * @private
 	 */
-	function togglePopup(popup) {
-		popup.style.display = popup.style.display === "block"
-			? "none"
-			: "block";
+	function togglePopup(popup, immediateClose) {
+		if (immediateClose) {
+			popup.style.display = "none";
+		} else {
+			popup.style.display = popup.style.display === "block"
+				? "none"
+				: "block";
+		}
 	}
 
 	/**
