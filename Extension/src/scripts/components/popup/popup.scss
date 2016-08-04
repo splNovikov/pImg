@@ -37,8 +37,11 @@
     .close-icon {
       position: absolute;
       right: 10px;
-      display: inline-flex;
       cursor: pointer;
+      /* It does not working in some chrome versions: */
+      //display: inline-flex;
+      /* Instead of it: */
+      top: 7px;
 
       &:hover {
         font-weight: bold;
