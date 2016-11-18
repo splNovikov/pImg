@@ -1,1 +1,1 @@
-Paste images extension for chrome.
+Paste images extension for Chrome.

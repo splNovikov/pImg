@@ -1,0 +1,16 @@
+//https://material.google.com/style/color.html#color-color-palette
+$deep-orange: #FF5722;
+$purple: rgb(156, 39, 176);
+$cyan: #009dd9;
+$dark-gray: #333;
+$white: #fff;
+
+$vk-blue: #6287ae;
+$vk-blue2: #6387ac;
+$vk-light-gray: #e7e8ec;
+$vk-light-gray2: #cad2db;
+$vk-gray: #656565;
+
+$primary: $deep-orange;
+$primary-lighter: lighten($primary, 20%);
+

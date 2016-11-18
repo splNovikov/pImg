@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VK emulation</title>
+    <link rel="stylesheet" type="text/css" href="styles/emulate.css">
+    <link rel="stylesheet" type="text/css" href="styles/vk_styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/override_vk_emulation.css">
+    <link rel="stylesheet" type="text/css" href="../dist/styles/main.min.css">
+</head>
+<body>
+
+<div class="small-div" id="div1">
+    <div class="im-chat-input--text" tabindex="0" contenteditable="true" id="im_editable2000000107"></div>
+    <button class="fl_l emulation_btn" onclick="removeBtn1()">Remove btn1</button>
+    <button class="fl_r _im_send" onclick="sendMes()" id="btn1">Send</button>
+    <button class="fl_r _im_send" onclick="sendMes()">Send</button>
+</div>
+
+<script>
+    var parent = document.getElementById('div1');
+    var child = document.getElementById('btn1');
+
+    function removeBtn1(){
+        parent.removeChild(child);
+        console.info('btn1 deleted');
+    }
+
+    //default vk behaviour
+    function sendMes(){
+        alert('VK event');
+    }
+</script>
+
+<script src="../dist/scripts/libs/vendor.min.js"></script>
+<script src="../dist/scripts/app/app.js"></script>
+
+</body>
+</html>

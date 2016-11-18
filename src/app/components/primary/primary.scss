@@ -1,0 +1,22 @@
+@import "../../../assets/styles/basics/colors";
+
+.p-img-old-content-wrapper {
+  margin-right: 20px;
+}
+
+.p-img-primary {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  transition: 500ms;
+  border-radius: 0 3px 3px 0;
+
+  &:hover {
+    background-color: $primary-lighter;
+  }
+}
