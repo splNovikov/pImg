@@ -1,8 +1,8 @@
 .idea/
 node_modules/
-*.css
 *.map
 PublishPROD.crx
 PublishPROD.pem
 /bower_components/
 /archives/
+/dist/
